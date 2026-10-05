@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f6f3">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0f1110">
+<meta name="color-scheme" content="light dark">
+<link rel="manifest" href="manifest.json"><link rel="apple-touch-icon" href="icon-192.png">
+<title>Road to 90</title>
+<style>
+:root{--bg:#f6f6f3;--card:#fff;--ink:#141714;--mute:#6b706b;--line:#e4e5e0;--acc:#d9480f;--on:#fff;--warn:#c2255c;--ease:cubic-bezier(.23,1,.32,1)}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1110;--card:#181b19;--ink:#eef0ec;--mute:#8c928c;--line:#262a27;--acc:#fb923c;--on:#1f0e02;--warn:#fb7185}}
+*{box-sizing:border-box;margin:0}
+html{height:100%;-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%;overscroll-behavior:none}
+body{height:100%;background:linear-gradient(180deg,color-mix(in srgb,var(--acc) 13%,var(--bg)),var(--bg) 280px) no-repeat var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,sans-serif}
+.app{height:100dvh;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px)}
+main{flex:1;overflow-y:auto;padding:16px 16px 28px;width:100%;max-width:560px;margin:0 auto}
+h1{font-size:1.9rem;line-height:1.05;letter-spacing:-.02em;font-weight:700}
+h2{font-size:1rem;margin:18px 0 6px}
+.mute{color:var(--mute);font-size:.9rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.05);padding:14px;margin-top:10px;display:flex;flex-direction:column;gap:8px}
+.card.row{flex-direction:row;align-items:center;justify-content:space-between}
+.card.warn{border-color:var(--warn);color:var(--warn)}
+input,textarea{width:100%;font:inherit;font-size:16px;color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:10px;padding:10px}
+textarea{min-height:90px;resize:vertical}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.two label{display:flex;flex-direction:column;gap:4px;font-size:.9rem;color:var(--mute)}
+button{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:12px;min-height:44px;padding:0 16px;cursor:pointer;touch-action:manipulation;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;transition:transform 120ms var(--ease),background-color 120ms,color 120ms}
+button:active{transform:scale(.97)}
+button[aria-pressed=true],.primary{background:var(--acc);color:var(--on);border-color:var(--acc)}
+.primary{width:100%;margin-top:14px;font-weight:600}
+.cnt{display:flex;align-items:center;gap:6px}.cnt button{width:44px;padding:0;font-size:1.3rem}
+.cnt output{min-width:2ch;text-align:center;font-size:1.3rem;font-variant-numeric:tabular-nums}
+.seg{display:flex;gap:6px}.seg button{flex:1;padding:0}
+.bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--acc);transform-origin:left;transition:transform 250ms var(--ease)}
+ul{padding-left:1.1rem}li{margin:3px 0}
+nav{display:flex;gap:6px;padding:8px 12px calc(8px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);background:var(--bg)}
+nav button{flex:1;border:0;background:transparent;color:var(--mute);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:.75rem;padding:6px 0}
+nav button[aria-current=true]{color:var(--acc);font-weight:600}
+#t{position:fixed;left:50%;bottom:calc(76px + env(safe-area-inset-bottom,0px));transform:translate(-50%,12px);opacity:0;background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:99px;pointer-events:none;transition:transform 200ms var(--ease),opacity 200ms var(--ease)}
+#t.on{transform:translate(-50%,0);opacity:1}
+.in{animation:in 120ms ease-out}@keyframes in{from{opacity:0}}
+@media(prefers-reduced-motion:reduce){.bar i,#t{transition:opacity 150ms}button:active{transform:none}}
+@media(hover:hover) and (pointer:fine){button:hover{border-color:var(--acc)}}
+
+:root{--steps:#d9480f;--water:#0b7fb5;--soda:#c2255c;--sweet:var(--soda);--work:var(--steps);--prot:var(--steps)}
+@media(prefers-color-scheme:dark){:root{--steps:#fb923c;--water:#38bdf8;--soda:#fb7185}}
+.c-steps{--c:var(--steps)}.c-water{--c:var(--water)}.c-soda{--c:var(--soda)}.c-sweet{--c:var(--sweet)}.c-work{--c:var(--work)}.c-prot{--c:var(--prot)}
+.card[class*=" c-"]{border-left:4px solid var(--c)}
+.card[class*=" c-"] output,.card[class*=" c-"] b:first-child,.card[class*=" c-"] .big{color:var(--c)}
+.card[class*=" c-"] button[aria-pressed=true]{background:var(--c);border-color:var(--c);color:var(--on)}
+.bar i{background:var(--c,var(--acc))}
+.stat{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.stat .card{margin-top:0;gap:2px}
+.big{font-size:1.6rem;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+svg text{fill:var(--mute);font:10px system-ui}
+table{width:100%;border-collapse:collapse;font-size:.85rem;font-variant-numeric:tabular-nums}td,th{padding:6px 4px;text-align:right;border-bottom:1px solid var(--line)}th{color:var(--mute);font-weight:500}td:first-child,th:first-child{text-align:left}
+.ic{width:20px;height:20px;flex:none}.t{display:inline-flex;align-items:center;gap:8px}h2.t{display:flex}
+.hero{flex-direction:row;align-items:center;gap:18px}.rw{position:relative;width:108px;height:108px;flex:none}.ring{width:100%;height:100%;transform:rotate(-90deg)}
+.ring circle:last-child{transition:stroke-dashoffset 450ms var(--ease),stroke 300ms ease}.conf{position:absolute;left:50%;top:50%;width:7px;height:7px;border-radius:50%;pointer-events:none}.chip.pop{animation:pop 320ms var(--ease)}@keyframes pop{40%{transform:scale(1.12)}}
+.rt{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.1}.rt b{font-size:1.5rem;font-variant-numeric:tabular-nums}.rt span{font-size:.75rem;color:var(--mute)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.chip{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:99px;border:1px solid var(--line);background:var(--card);color:var(--mute);font-size:.85rem;font-variant-numeric:tabular-nums;transition:background-color 200ms,color 200ms}
+.chip .ic{width:16px;height:16px}.chip.ok{color:var(--c,var(--steps));background:color-mix(in srgb,var(--c,var(--steps)) 15%,var(--card));border-color:transparent}
+@keyframes up{from{opacity:0;transform:translateY(10px)}}
+.enter>*{animation:up 300ms var(--ease) both}.enter>:nth-child(2){animation-delay:40ms}.enter>:nth-child(3){animation-delay:80ms}.enter>:nth-child(4){animation-delay:120ms}.enter>:nth-child(5){animation-delay:160ms}.enter>:nth-child(6){animation-delay:200ms}.enter>:nth-child(7){animation-delay:240ms}.enter>:nth-child(n+8){animation-delay:280ms}
+@media(prefers-reduced-motion:reduce){.enter>*{animation:in 150ms ease-out both}.ring circle:last-child{transition:none}.chip.pop{animation:none}}
+.pal{display:flex;align-items:center;gap:8px;width:100%;margin-top:8px;justify-content:flex-start}.pal span{margin-left:6px}.dot{width:18px;height:18px;border-radius:50%;display:block}.pal[aria-pressed=true]{background:var(--card);color:var(--ink);border:2px solid var(--acc)}
+</style></head>
+<body><div class="app"><main id="v"></main>
+<nav></nav></div>
+<div id="t" role="status"></div>
+<script>
+const $=s=>document.querySelector(s),DAY=864e5,K='road90';
+const iso=d=>new Date(d.getTime()-d.getTimezoneOffset()*6e4).toISOString().slice(0,10);
+const todayS=()=>iso(new Date()),addD=(s,n)=>new Date(Date.parse(s)+n*DAY).toISOString().slice(0,10);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let S;try{S=JSON.parse(localStorage.getItem(K))}catch(e){}
+S=S||{start:todayS(),days:{},wk:{},plan:null};
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+const PLAN0={week:1,title:'Week 1: get started',stepsGoal:10000,stepsFloor:6000,water:6,sodaMax:3,sweetsMax:1,workouts:3,
+rules:['Protein source in both meals','Dinner: protein and vegetables first, one plate','Never miss 2 days in a row','6k steps = a win on a hard day','Sleep 7+ hours'],
+sessions:['Day 1: 1 round (~8 min)','Day 3: 1 round (small on purpose)','Day 5: 2 rounds'],
+circuit:['10 sit-to-stands','8 incline push-ups','12 glute bridges','8 dead bugs per side','20s knee plank'],notes:''};
+const plan=()=>S.plan||PLAN0;
+const EMPTY={steps:0,water:0,soda:0,sweets:0,workout:0,protein:0,portion:'',meal:'',sweetNote:''};
+const get=d=>S.days[d]||EMPTY;
+const set=(d,p)=>{S.days[d]=Object.assign({},get(d),p);save();render()};
+const weekNo=d=>Math.max(1,Math.floor((Date.parse(d)-Date.parse(S.start))/DAY/7)+1);
+const wkDays=w=>Array.from({length:7},(_,i)=>addD(S.start,(w-1)*7+i));
+function summ(w){const p=plan(),t=todayS(),ds=wkDays(w).filter(d=>d<=t&&S.days[d]),n=ds.length||1,sum=k=>ds.reduce((a,d)=>a+(+S.days[d][k]||0),0);
+return{ds,n:ds.length,steps:Math.round(sum('steps')/n),floor:ds.filter(d=>S.days[d].steps>=p.stepsFloor).length,goal:ds.filter(d=>S.days[d].steps>=p.stepsGoal).length,water:(sum('water')/n).toFixed(1),soda:sum('soda'),sweets:sum('sweets'),work:sum('workout'),prot:sum('protein')}}
+function missRun(d){let r=0;for(let i=1;;i++){const x=addD(d,-i);if(x<S.start||get(x).steps>=plan().stepsFloor)break;r++}return r}
+const cnt=(k,l,n,sub)=>`<div class="card row c-${({water:'water',soda:'soda',sweets:'sweet'})[k]}"><div><b class="t">${ic(({water:'droplet',soda:'cup',sweets:'cookie'})[k])}${l}</b><div class="mute">${sub}</div></div><div class="cnt"><button data-a="dec" data-k="${k}" aria-label="Less ${l}">−</button><output>${n}</output><button data-a="inc" data-k="${k}" aria-label="More ${l}">+</button></div></div>`;
+const seg=(k,o,v)=>`<div class="seg">${o.map(x=>`<button data-a="set" data-k="${k}" data-v="${x}" aria-pressed="${String(v)===String(x)}">${x}</button>`).join('')}</div>`;
+const IC={activity:'<path d="M3 12h4l3-8 4 16 3-8h4"/>',droplet:'<path d="M12 2.7s6 6.2 6 10.8a6 6 0 0 1-12 0C6 8.9 12 2.7 12 2.7z"/>',cup:'<path d="M6 8h12l-1.5 12a1 1 0 0 1-1 .9h-7a1 1 0 0 1-1-.9z"/><path d="M13 8l1.5-5H18"/>',cookie:'<circle cx="12" cy="12" r="9"/><path d="M9 9.5h.01M14.5 9h.01M15 14.5h.01M9.5 14.5h.01M12 12h.01"/>',dumbbell:'<path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11"/>',egg:'<path d="M12 3c-3.5 0-6.5 5.5-6.5 10a6.5 6.5 0 0 0 13 0C18.5 8.5 15.5 3 12 3z"/>',utensils:'<path d="M4 3v5a3 3 0 0 0 6 0V3M7 11v10M17 3c-2 1.5-3 4-3 7h3v11"/>',sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',calendar:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/>',bars:'<path d="M5 21V10M12 21V4M19 21v-7"/>',clipboard:'<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9zM9 12h6M9 16h4"/>',flame:'<path d="M12 22c4 0 7-2.8 7-7 0-3-2-5-3-7-1 2-2 2.5-3 2.5C13 8 13 5 11 2 9 5 5 8 5 15c0 4.2 3 7 7 7z"/>',trending:'<path d="M22 17l-8.5-8.5-5 5L2 7"/><path d="M16 17h6v-6"/>',target:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>',gauge:'<path d="M4 18a9 9 0 1 1 16 0"/><path d="M12 14l4-5"/>',palette:'<circle cx="13.5" cy="6.5" r="1"/><circle cx="17.5" cy="10.5" r="1"/><circle cx="8.5" cy="7.5" r="1"/><circle cx="6.5" cy="12.5" r="1"/><path d="M12 22a10 10 0 1 1 10-10c0 3-2 4-4 4h-2a2 2 0 0 0-1 3.7c.6.5.5 2.3-3 2.3z"/>'};
+const ic=n=>`<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[n]}</svg>`;
+let ringO=264,ringC='var(--ink)',fx=0,stepsStage=null,stageD='',okPrev={};
+function celebrate(st){const r=$('.rw');if(!r)return;if(navigator.vibrate)navigator.vibrate(st===2?[14,40,14]:10);
+toast(st===2?'Steps goal reached':'Minimum hit. Today counts.');
+if(st!==2||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+const cs=['var(--steps)','var(--water)','var(--soda)'];
+for(let i=0;i<14;i++){const a=i/14*6.283,k=62+Math.random()*28,e=document.createElement('i');e.className='conf';e.style.background=cs[i%3];r.append(e);
+e.animate([{transform:'translate(-50%,-50%) scale(.4)',opacity:1},{transform:`translate(calc(-50% + ${Math.cos(a)*k}px),calc(-50% + ${Math.sin(a)*k}px)) scale(1)`,opacity:0}],{duration:700,easing:'cubic-bezier(.23,1,.32,1)'}).onfinish=()=>e.remove()}
+r.animate([{transform:'scale(1)'},{transform:'scale(1.06)'},{transform:'scale(1)'}],{duration:350,easing:'cubic-bezier(.23,1,.32,1)'})}
+function today(){const d=todayS(),x=get(d),p=plan(),w=weekNo(d),s=summ(w),run=missRun(d),o=Math.round(264*(1-Math.min(1,x.steps/p.stepsGoal)));
+const ch=[['activity','Steps',x.steps>=p.stepsFloor,''],['droplet',`${x.water}/${p.water}`,x.water>=p.water,'c-water'],['dumbbell','Gym',x.workout,''],['egg',`${x.protein}/2`,x.protein>=2,''],['cookie','Sweets',x.sweets<=p.sweetsMax,'']];
+if(stageD!==d){stageD=d;stepsStage=null;okPrev={}}
+const stg=x.steps>=p.stepsGoal?2:x.steps>=p.stepsFloor?1:0;if(stepsStage!=null&&stg>stepsStage)fx=stg;stepsStage=stg;
+const pops=ch.map(c=>okPrev[c[0]]===false&&c[2]);ch.forEach(c=>okPrev[c[0]]=!!c[2]);const col=o===0?'var(--steps)':'var(--ink)';
+return`<div class="card hero"><div class="rw"><svg class="ring" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="none" stroke="var(--line)" stroke-width="9"/><circle cx="50" cy="50" r="42" fill="none" stroke-width="9" stroke-linecap="round" stroke-dasharray="264" style="stroke:${ringC};stroke-dashoffset:${ringO}" data-o="${o}" data-c="${col}"/></svg><div class="rt"><b>${x.steps>=1000?(x.steps/1000).toFixed(1)+'k':x.steps}</b><span>steps</span></div></div>
+<div><h1>Today</h1><p class="mute">${new Date(d+'T12:00:00').toLocaleDateString(undefined,{weekday:'long',month:'short',day:'numeric'})} · Week ${w}</p><p class="mute"><b>${ch.filter(c=>c[2]).length}/5</b> on track</p></div></div>
+<div class="chips">${ch.map((c,i)=>`<span class="chip ${c[2]?'ok':''} ${c[3]} ${pops[i]?'pop':''}">${ic(c[0])}${c[1]}</span>`).join('')}</div>
+${run?`<div class="card warn">Yesterday was under ${p.stepsFloor.toLocaleString()} steps. Don't make it two: hit the minimum today.</div>`:''}
+<div class="card c-steps"><label for="st"><b class="t">${ic('activity')}Steps</b></label><input id="st" type="number" inputmode="numeric" data-k="steps" value="${x.steps||''}" placeholder="0"><div class="mute">${x.steps>=p.stepsFloor?'Minimum hit ✓':'Minimum '+p.stepsFloor.toLocaleString()} · goal ${p.stepsGoal.toLocaleString()}</div></div>
+${cnt('water','Water',x.water,'cups · target '+p.water)}${cnt('soda','Soda',x.soda,`this week ${s.soda}/${p.sodaMax}`)}${cnt('sweets','Sweets',x.sweets,'max '+p.sweetsMax+' a day')}
+<div class="card row c-work"><b class="t">${ic('dumbbell')}Workout</b><button data-a="tog" data-k="workout" aria-pressed="${!!x.workout}">${x.workout?'Done ✓':'Not yet'}</button></div>
+<div class="card c-prot"><b class="t">${ic('egg')}Protein in meals (0-2)</b>${seg('protein',[0,1,2],x.protein)}<b class="t">${ic('utensils')}Portion size</b>${seg('portion',['S','N','L'],x.portion)}</div>
+<div class="card"><label for="ml"><b class="t">${ic('utensils')}Meals</b> <span class="mute">optional</span></label><input id="ml" data-k="meal" value="${esc(x.meal)}" placeholder="kabsa, chicken, big plate">
+<label for="sn"><b class="t">${ic('cookie')}Sweets</b> <span class="mute">optional</span></label><input id="sn" data-k="sweetNote" value="${esc(x.sweetNote)}" placeholder="what was it?"></div>`}
+function rw(){const w=weekNo(todayS());return summ(w).n?w:Math.max(1,w-1)}
+function report(){const w=rw(),s=summ(w),p=plan(),ks=Object.keys(S.wk).map(Number).sort((a,b)=>a-b),c=S.wk[ks[ks.length-1]]||{},q=S.wk[ks[ks.length-2]]||{},dl=(a,b)=>a!=null&&b!=null&&a!==''&&b!==''?` (${(a-b>0?'+':'')}${(a-b).toFixed(1)})`:'';
+return[`WEEK ${w} REPORT (plan: ${p.title})`,`Weight: ${c.weight??'-'} kg${dl(c.weight,q.weight)} | Waist: ${c.waist??'-'} cm${dl(c.waist,q.waist)}`,`Logged days: ${s.n}/7`,`Avg steps: ${s.steps} | days >= ${p.stepsFloor}: ${s.floor} | days >= ${p.stepsGoal}: ${s.goal}`,`Avg water: ${s.water} cups (target ${p.water})`,`Soda: ${s.soda} (limit ${p.sodaMax}) | Sweets: ${s.sweets}`,`Workouts: ${s.work}/${p.workouts} | Protein meals: ${s.prot}/${s.n*2}`,
+...s.ds.filter(d=>S.days[d].meal||S.days[d].sweetNote).map(d=>`${d.slice(5)} [${S.days[d].portion||'-'}]: ${S.days[d].meal||''}${S.days[d].sweetNote?' | sweets: '+S.days[d].sweetNote:''}`),'How it felt: '].join('\n')}
+function week(){const w=weekNo(todayS()),r=S.wk[w]||{},s=summ(rw()),p=plan();
+return`<h1>Week ${w}</h1><p class="mute">Weigh in once a week, same conditions.</p>
+<div class="card"><b class="t">${ic('gauge')}Check-in</b><div class="two"><label>Weight (kg)<input type="number" inputmode="decimal" step="0.1" data-w="weight" value="${r.weight??''}"></label><label>Waist (cm)<input type="number" inputmode="decimal" step="0.1" data-w="waist" value="${r.waist??''}"></label></div></div>
+<div class="card"><b class="t">${ic('bars')}Week ${rw()} so far</b><div>Logged ${s.n}/7 days</div><div>Avg steps ${s.steps.toLocaleString()} · ≥${p.stepsFloor/1000}k ${s.floor} days · ≥${p.stepsGoal/1000}k ${s.goal} days</div><div>Water ${s.water} cups/day · Soda ${s.soda}/${p.sodaMax} · Sweets ${s.sweets}</div><div>Workouts ${s.work}/${p.workouts} · Protein meals ${s.prot}/${s.n*2}</div></div>
+<button class="primary" data-a="copy">Copy report for Claude</button>`}
+function planV(){const p=plan(),l=a=>`<ul>${(a||[]).map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`;
+return`<h1>Plan</h1><p class="mute">${esc(p.title)}</p>
+<div class="card"><b class="t">${ic('target')}Targets</b><div>Steps goal ${p.stepsGoal.toLocaleString()} · minimum ${p.stepsFloor.toLocaleString()}</div><div>Water ${p.water} cups · Soda max ${p.sodaMax}/week · Sweets max ${p.sweetsMax}/day · ${p.workouts} workouts</div></div>
+<div class="card"><b class="t">${ic('clipboard')}Rules</b>${l(p.rules)}</div><div class="card"><b class="t">${ic('dumbbell')}Sessions</b>${l(p.sessions)}<b class="t">${ic('activity')}Circuit</b>${l(p.circuit)}${p.notes?`<div class="mute">${esc(p.notes)}</div>`:''}</div>
+<h2>Import next week's plan</h2><textarea id="imp" placeholder="Paste the plan JSON from Claude"></textarea><button class="primary" data-a="imp">Import plan</button>
+<h2>Backup</h2><button data-a="bk">Copy backup</button><textarea id="rs" placeholder="Paste a backup to restore" style="margin-top:8px"></textarea><button data-a="rs" style="margin-top:8px">Restore backup</button>`}
+const GOAL=90;
+function bars(a,max,col,refs){const W=300,H=90,bw=W/a.length;
+return`<svg viewBox="0 0 ${W} ${H+4}" width="100%" role="img">${refs.map(r=>{const y=H-r.v/max*H;return`<line x1="0" x2="${W}" y1="${y}" y2="${y}" stroke="var(--mute)" stroke-dasharray="3 3" opacity=".6"/><text x="2" y="${y-2}">${r.l}</text>`}).join('')}${a.map((v,i)=>{const h=Math.max(1,v/max*H);return`<rect x="${i*bw+1.5}" y="${H-h}" width="${bw-3}" height="${h}" rx="3" fill="${col(v)}"/>`}).join('')}</svg>`}
+function wchart(ks,key,col,goal){const W=300,H=110,pd=18,vs=ks.map(k=>S.wk[k][key]),lo=Math.min(...vs,...(goal!=null?[goal]:[]))-1,hi=Math.max(...vs)+1,y=v=>pd+(hi-v)/(hi-lo)*(H-2*pd),x=i=>pd+i*(W-2*pd)/(ks.length-1);
+return`<svg viewBox="0 0 ${W} ${H}" width="100%" role="img">${goal!=null?`<line x1="0" x2="${W}" y1="${y(goal)}" y2="${y(goal)}" stroke="var(--mute)" stroke-dasharray="3 3"/><text x="2" y="${y(goal)-3}">goal ${goal}</text>`:''}<polyline fill="none" stroke="${col}" stroke-width="2.5" stroke-linejoin="round" points="${vs.map((v,i)=>x(i)+','+y(v)).join(' ')}"/>${vs.map((v,i)=>`<circle cx="${x(i)}" cy="${y(v)}" r="4" fill="${col}"/><text x="${x(i)}" y="${y(v)-8}" text-anchor="middle">${v}</text>`).join('')}</svg>`}
+function stats(){const p=plan(),t=todayS(),ks=Object.keys(S.wk).map(Number).filter(k=>S.wk[k].weight).sort((a,b)=>a-b),w0=ks.length?S.wk[ks[0]].weight:null,w1=ks.length?S.wk[ks[ks.length-1]].weight:null;
+const kw=Object.keys(S.wk).map(Number).filter(k=>S.wk[k].waist).sort((a,b)=>a-b),a0=kw.length?S.wk[kw[0]].waist:null,a1=kw.length?S.wk[kw[kw.length-1]].waist:null;
+let st=0;for(let i=get(t).steps>=p.stepsFloor?0:1;;i++){const d=addD(t,-i);if(d<S.start||get(d).steps<p.stepsFloor)break;st++}
+const last=Array.from({length:14},(_,i)=>get(addD(t,i-13))),rows=[];for(let w=weekNo(t);w>=1;w--){const s=summ(w);if(s.n)rows.push(`<tr><td>W${w}</td><td>${s.steps}</td><td>${s.water}</td><td>${s.work}</td><td>${s.soda}</td><td>${s.sweets}</td></tr>`)}
+return`<h1>Stats</h1><p class="mute">Your numbers, not a verdict.</p>
+<div class="stat"><div class="card c-steps"><span class="mute t">${ic('trending')}Lost so far</span><span class="big">${w0!=null?(w0-w1).toFixed(1)+' kg':'–'}</span></div><div class="card c-water"><span class="mute t">${ic('target')}To goal (${GOAL} kg)</span><span class="big">${w1!=null?Math.max(0,w1-GOAL).toFixed(1)+' kg':'–'}</span></div><div class="card c-soda"><span class="mute t">${ic('flame')}Minimum streak</span><span class="big">${st} days</span></div><div class="card c-steps"><span class="mute t">${ic('calendar')}Days logged</span><span class="big">${Object.keys(S.days).length}</span></div><div class="card c-water"><span class="mute t">${ic('gauge')}Weight now</span><span class="big">${w1!=null?w1+' kg':'–'}</span></div><div class="card c-soda"><span class="mute t">${ic('gauge')}Waist now</span><span class="big">${a1!=null?a1+' cm':'–'}</span><span class="mute">${kw.length>1?(a1-a0>0?'+':'')+(a1-a0).toFixed(1)+' cm since start':'since start: –'}</span></div></div>
+<h2 class="t">${ic('gauge')}Weight by check-in</h2><div class="card">${ks.length>1?wchart(ks,'weight','var(--steps)',GOAL):'<span class="mute">Add 2 weekly check-ins to see the trend.</span>'}</div>
+<h2 class="t">${ic('gauge')}Waist by check-in</h2><div class="card">${kw.length>1?wchart(kw,'waist','var(--water)',null):'<span class="mute">Add 2 weekly check-ins to see the trend.</span>'}</div>
+<h2 class="t">${ic('activity')}Steps, last 14 days</h2><div class="card c-steps">${bars(last.map(x=>x.steps),Math.max(p.stepsGoal*1.1,...last.map(x=>x.steps)),v=>v>=p.stepsFloor?'var(--steps)':'var(--soda)',[{v:p.stepsFloor,l:'min'},{v:p.stepsGoal,l:'goal'}])}</div>
+<h2 class="t">${ic('droplet')}Water (cups), last 14 days</h2><div class="card c-water">${bars(last.map(x=>x.water),Math.max(p.water*1.3,...last.map(x=>x.water)),()=>'var(--water)',[{v:p.water,l:'target'}])}</div>
+<h2 class="t">${ic('calendar')}By week</h2><div class="card">${rows.length?`<table><tr><th></th><th>Steps</th><th>Water</th><th>Gym</th><th>Soda</th><th>Sweet</th></tr>${rows.join('')}</table>`:'<span class="mute">Log a day to see weekly rows.</span>'}</div>`}
+let tab='today';const views={today,week,plan:planV,stats};
+function render(fresh){$('#v').innerHTML=views[tab]();document.querySelectorAll('nav button').forEach(b=>b.setAttribute('aria-current',b.dataset.v===tab));
+const r=$('[data-o]');if(r)requestAnimationFrame(()=>{r.style.strokeDashoffset=r.dataset.o;r.style.stroke=r.dataset.c;ringO=+r.dataset.o;ringC=r.dataset.c});
+if(fx){celebrate(fx);fx=0}
+if(fresh){const v=$('#v');v.scrollTop=0;v.classList.add('enter');clearTimeout(et);et=setTimeout(()=>v.classList.remove('enter'),700)}}
+let et;
+let tt;function toast(m){const t=$('#t');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),1800)}
+function copy(t){(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>toast('Copied'),()=>{const a=document.createElement('textarea');a.value=t;document.body.append(a);a.select();try{document.execCommand('copy');toast('Copied')}catch(e){toast('Copy failed')}a.remove()})}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b)return;const a=b.dataset.a,k=b.dataset.k,d=todayS(),x=get(d);
+if(a==='tab'){tab=b.dataset.v;render(true)}
+else if(a==='inc')set(d,{[k]:x[k]+1});else if(a==='dec')set(d,{[k]:Math.max(0,x[k]-1)});else if(a==='tog')set(d,{[k]:x[k]?0:1});
+else if(a==='set')set(d,{[k]:k==='protein'?+b.dataset.v:(x[k]===b.dataset.v?'':b.dataset.v)});
+else if(a==='copy')copy(report());else if(a==='bk')copy(JSON.stringify(S));
+else if(a==='imp'){try{const o=JSON.parse($('#imp').value);if(!(o.stepsGoal>0&&o.stepsFloor>0))throw 0;S.plan=Object.assign({},PLAN0,o);save();render();toast('Plan updated')}catch(err){toast('Invalid plan')}}
+else if(a==='rs'){try{const o=JSON.parse($('#rs').value);if(!o.days||!o.start)throw 0;S=o;save();render();toast('Restored')}catch(err){toast('Invalid backup')}}});
+document.addEventListener('change',e=>{const t=e.target,d=todayS();
+if(t.dataset.k)set(d,{[t.dataset.k]:t.type==='number'?Math.max(0,+t.value||0):t.value});
+else if(t.dataset.w){const w=weekNo(d);S.wk[w]=Object.assign({},S.wk[w],{[t.dataset.w]:t.value===''?'':+t.value});save();render()}});
+if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
+$('nav').innerHTML=[['today','sun','Today'],['week','calendar','Week'],['stats','bars','Stats'],['plan','clipboard','Plan']].map(a=>`<button data-a="tab" data-v="${a[0]}">${ic(a[1])}<span>${a[2]}</span></button>`).join('');
+render(true);
+</script></body></html>
